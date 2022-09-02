@@ -1,20 +1,19 @@
 #include"Prompt.h"
 
-int Prompt::Open(GLFWwindow* window, const char* description, const char* title, unsigned int type)
+int Prompt::Open(const char* description, const char* title, unsigned int type)
 {
-	int result = MessageBoxA(glfwGetWin32Window(window), description, title, type);
+	int result = MessageBoxA(GetActiveWindow(), description, title, type);
 	return result;
 }
 
 ///		How To Use
 /// Header File : #include<WinUser.h>
 /// Additional Includes : #include <Windows.h>
-///						  #include <glfw3.h>
-///						  #define GLFW_EXPOSE_NATIVE_WIN32
-///						  #include <glfw3native.h>
 /// 
 /// Function : MessageBoxA
 ///		First Parameter : Parent window of the message box
+///			GetActiveWindow()
+///			- Retrieves the window handle to the active window attached to the calling thread's message queue.
 ///		Second Parameter : The message to be displayed
 ///		Third Parameter : The title of the prompt dialog
 ///		Fourth Parameter : TYPE 

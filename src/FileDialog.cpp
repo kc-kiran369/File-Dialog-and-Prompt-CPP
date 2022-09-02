@@ -1,14 +1,12 @@
 #include"FileDialog.h"
 
-#include<iostream>
-
-std::string FileDialog::OpenFile(const char* filter, GLFWwindow* window)
+std::string FileDialog::OpenFile(const char* filter)
 {
 	OPENFILENAMEA ofn;
 	char szFile[260] = { 0 };
 	ZeroMemory(&ofn, sizeof(OPENFILENAME));
 	ofn.lStructSize = sizeof(OPENFILENAME);
-	ofn.hwndOwner = glfwGetWin32Window((GLFWwindow*)window);
+	ofn.hwndOwner = GetActiveWindow();
 	ofn.lpstrFile = szFile;
 	ofn.nMaxFile = sizeof(szFile);
 	ofn.lpstrFilter = filter;
@@ -21,13 +19,13 @@ std::string FileDialog::OpenFile(const char* filter, GLFWwindow* window)
 	return std::string();
 }
 
-std::string FileDialog::SaveFile(const char* filter, GLFWwindow* window)
+std::string FileDialog::SaveFile(const char* filter)
 {
 	OPENFILENAMEA ofn;
 	char szFile[260] = { 0 };
 	ZeroMemory(&ofn, (sizeof(OPENFILENAME)));
 	ofn.lStructSize = sizeof(OPENFILENAME);
-	ofn.hwndOwner = glfwGetWin32Window(window);
+	ofn.hwndOwner = GetActiveWindow();
 	ofn.lpstrFile = szFile;
 	ofn.nMaxFile = sizeof(szFile);
 	ofn.lpstrFilter = filter;
@@ -45,9 +43,6 @@ std::string FileDialog::SaveFile(const char* filter, GLFWwindow* window)
 ///
 ///Additional Includes: #include <Windows.h>
 ///						#include <string>
-///						#include <glfw3.h>
-///						#define GLFW_EXPOSE_NATIVE_WIN32
-///						#include <glfw3native.h>
 
 ///  lStructSize
 ///- The length, in bytes, of the structure.Use sizeof(OPENFILENAME) for this parameter.
@@ -57,6 +52,7 @@ std::string FileDialog::SaveFile(const char* filter, GLFWwindow* window)
 ///
 ///  nFilterIndex
 ///- The index of the currently selected filter in the File Types control.
+/// 
 ///  lpstrFile
 ///- The file name used to initialize the File Name edit control.The first character of this buffer must be NULL if initialization is not necessary.
 

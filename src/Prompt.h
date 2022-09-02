@@ -4,13 +4,9 @@
 #include <Windows.h>
 #include<WinUser.h>
 
-#include <glfw3.h>
-#define GLFW_EXPOSE_NATIVE_WIN32
-#include <glfw3native.h>
-
 class Prompt
 {
 public:
-	static int Open(GLFWwindow* window, const char* description, const char* title, unsigned int type);
+	static int Open(const char* description, const char* title, unsigned int type);
 };
 #endif
